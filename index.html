@@ -8,35 +8,77 @@
 </head>
 <body>
     <h1>JavaScript Calculator</h1>
-    <form>
-        <input type="text" id="screen" readonly>
-        <div class="buttons">
-            <button class="num" value="7">7</button>
-            <button class="num" value="8">8</button>
-            <button class="num" value="9">9</button>
-            <button class="operator" value="+">+</button>
-            <button class="num" value="4">4</button>
-            <button class="num" value="5">5</button>
-            <button class="num" value="6">6</button>
-            <button class="operator" value="-">-</button>
-            <button class="num" value="1">1</button>
-            <button class="num" value="2">2</button>
-            <button class="num" value="3">3</button>
-            <button class="operator" value="*">*</button>
-            <button class="num" value="0">0</button>
-            <button class="operator" value=".">.</button>
-            <button class="operator" value="/">/</button>
-            <button class="operator" value="=">=</button>
-            <button class="clear" value="C">C</button>
-            <button class="operator" value="^">^</button>
-            <button class="operator" value="sqrt">sqrt</button>
-            <button class="operator" value="log">log</button>
-            <button class="operator" value="sin">sin</button>
-            <button class="operator" value="cos">cos</button>
-            <button class="operator" value="tan">tan</button>
+    <div class="calculator-container">
+        <div class="form-container">
+    <form>  
+        <input type="text" id="screen" readonly> 
+        <div class="button-grid">
+            <div class="row">
+                <button class="clear" value="C">C</button>
+                <button class="clear" value="()">()</button>
+                <button class="clear" value="%">%</button>
+                <button class="arithmetic" value="/">/</button>
+            </div>
+            <div class="row">
+                <button class="num" value="7">7</button>
+                <button class="num" value="8">8</button>
+                <button class="num" value="9">9</button>
+                <button class="arithmetic" value="*">*</button>
+            </div>
+            <div class="row">
+                <button class="num" value="4">4</button>
+                <button class="num" value="5">5</button>
+                <button class="num" value="6">6</button>
+                <button class="arithmetic" value="-">-</button>
+            </div>
+            <div class="row">
+                <button class="num" value="1">1</button>
+                <button class="num" value="2">2</button>
+                <button class="num" value="3">3</button>
+                <button class="arithmetic" value="*">+</button>
+            </div>
+            <div class="row">
+                <button class="num" value="^">^</button>
+                <button class="num" value="0">0</button>
+                <button class="num" value=".">.</button>
+                 <button class="arithmetic" value="=">=</button>
+            </div>
+            <div class="row">
+                <button class="operator" value="sqrt">sqrt</button>
+                <button class="operator" value="log">log</button>
+                <button class="operator" value="sin">sin</button>
+                <button class="operator" value="cos">cos</button>
+            </div>
+            <div class="row">
+                <button class="operator" value="tan">tan</button>
+            </div> 
         </div>
+         
     </form>
-
+    </div>
+    <div class="gif">
+        <img src="./Image/gif.gif" alt="">
+    </div> 
+    </div>
+    <footer>
+        <div class="footer">
+        <p>
+          Made with ❤️ by
+          <a href="https://github.com/Sauravkr1806" target="_blank" style="color: white;">
+            Saurav
+          </a>
+          |
+          <span id="year">&copy; </span>
+          |
+          <a
+            href="https://github.com/Sauravkr1806/Basic-Calculator"
+            target="_blank" style="color: white;"
+          >
+            Source
+          </a>
+        </p>
+    </div>
+      </footer>
     <script src="server.js"></script>
 </body>
 </html>

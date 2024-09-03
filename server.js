@@ -1,110 +1,111 @@
-let screen = document.getElementById('screen');
-let buttons = document.querySelectorAll('.buttons button');
+// Get the input screen element
+const screen = document.getElementById('screen');
 
-let calculator = {
-    display: '',
-    firstNumber: '',
-    operator: '',
-    secondNumber: '',
-    decimal: false
-};
-
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        switch (button.value) {
-            case '=':
-                calculate();
-                break;
-            case 'C':
-                clear();
-                break;
-            case '.':
-                addDecimal();
-                break;
-            case '^':
-                setOperator('^');
-                break;
-            case 'sqrt':
-                calculateSquareRoot();
-                break;
-            default:
-                if (button.classList.contains('num')) {
-                    appendNumber(button.value);
-                } else if (button.classList.contains('operator')) {
-                    setOperator(button.value);
-                }
-        }
-    });
-});
-
-function appendNumber(number) {
-    if (calculator.decimal) {
-        calculator.display += number;
-    } else {
-        calculator.display = calculator.display === '0' ? number : calculator.display + number;
-    }
-    screen.value = calculator.display;
+// Define a function to update the screen with the current calculation
+function updateScreen(value) {
+  screen.value = value;
 }
 
-function setOperator(operator) {
-    calculator.operator = operator;
-    calculator.firstNumber = calculator.display;
-    calculator.display = '';
-    calculator.decimal = false;
-    screen.value = '';
-}
-
-function addDecimal() {
-    if (!calculator.decimal) {
-        calculator.display += '.';
-        calculator.decimal = true;
-        screen.value = calculator.display;
-    }
-}
-
+// Define a function to perform calculations
 function calculate() {
-    calculator.secondNumber = calculator.display;
-    let result;
-    switch (calculator.operator) {
-        case '+':
-            result = parseFloat(calculator.firstNumber) + parseFloat(calculator.secondNumber);
-            break;
-        case '-':
-            result = parseFloat(calculator.firstNumber) - parseFloat(calculator.secondNumber);
-            break;
-        case '*':
-            result = parseFloat(calculator.firstNumber) * parseFloat(calculator.secondNumber);
-            break;
-        case '/':
-            result = parseFloat(calculator.firstNumber) / parseFloat(calculator.secondNumber);
-            break;
-        case '^':
-            result = Math.pow(parseFloat(calculator.firstNumber), parseFloat(calculator.secondNumber));
-            break;
+  const calculation = screen.value;
+  try {
+    const result = eval(calculation);
+    updateScreen(result);
+  } catch (error) {
+    updateScreen('Error');
+  }
+}
+
+// Define a function to handle parentheses
+function handleParentheses(value) {
+  const calculation = screen.value;
+  if (value === '(') {
+    updateScreen(calculation + '(');
+  } else if (value === ')') {
+    updateScreen(calculation + ')');
+  }
+}
+
+// Define a function to handle percentage
+function handlePercentage() {
+  const calculation = screen.value;
+  const num = parseFloat(calculation);
+  updateScreen(num / 100);
+}
+
+// Define a function to handle exponentiation
+function handleExponentiation() {
+  const calculation = screen.value;
+  const num = parseFloat(calculation);
+  updateScreen(Math.pow(num, 2));
+}
+
+// Define a function to handle square root
+function handleSquareRoot() {
+  const calculation = screen.value;
+  const num = parseFloat(calculation);
+  updateScreen(Math.sqrt(num));
+}
+
+// Define a function to handle logarithm
+function handleLogarithm() {
+  const calculation = screen.value;
+  const num = parseFloat(calculation);
+  updateScreen(Math.log(num));
+}
+
+// Define a function to handle trigonometric functions
+function handleTrigonometricFunctions(value) {
+  const calculation = screen.value;
+  const num = parseFloat(calculation);
+  switch (value) {
+    case 'sin':
+      updateScreen(Math.sin(num));
+      break;
+    case 'cos':
+      updateScreen(Math.cos(num));
+      break;
+    case 'tan':
+      updateScreen(Math.tan(num));
+      break;
+  }
+}
+
+// Add event listeners to each button
+document.querySelectorAll('button').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    const value = event.target.value;
+    switch (value) {
+      case 'C':
+        updateScreen('');
+        break;
+      case '(':
+      case ')':
+        handleParentheses(value);
+        break;
+      case '%':
+        handlePercentage();
+        break;
+      case '^':
+        handleExponentiation();
+        break;
+      case 'sqrt':
+        handleSquareRoot();
+        break;
+      case 'log':
+        handleLogarithm();
+        break;
+      case 'sin':
+      case 'cos':
+      case 'tan':
+        handleTrigonometricFunctions(value);
+        break;
+      case '=':
+        calculate();
+        break;
+      default:
+        updateScreen(screen.value + value);
     }
-    screen.value = result;
-    calculator.display = result;
-    calculator.firstNumber = '';
-    calculator.secondNumber = '';
-    calculator.operator = '';
-    calculator.decimal = false;
-}
-
-function calculateSquareRoot() {
-    let result = Math.sqrt(parseFloat(calculator.display));
-    screen.value = result;
-    calculator.display = result;
-    calculator.firstNumber = '';
-    calculator.secondNumber = '';
-    calculator.operator = '';
-    calculator.decimal = false;
-}
-
-function clear() {
-    calculator.display = '';
-    calculator.firstNumber = '';
-    calculator.secondNumber = '';
-    calculator.operator = '';
-    calculator.decimal = false;
-    screen.value = '';
-}
+  });
+});

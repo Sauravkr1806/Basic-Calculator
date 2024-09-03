@@ -1,32 +1,82 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-image: url(./Image/bg-image.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
+.button-grid{
+    margin-top: 12px;
+}
 .buttons {
     display: flex;
+    margin: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 button {
-    width: 50px;
-    height: 50px;
-    margin: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 8px;
     font-size: 24px;
     cursor: pointer;
+    border: 2px solid black;
+    border-radius: 10px;
 }
-
 button:hover {
-    background-color: #ccc;
+    opacity: 0.8;
 }
 
+.num {
+    background-color: #f1902e; /* light gray */
+    color: #fff;
+}
+
+.operator {
+    background-color: #ff3597; /* sky blue */
+    color: #fff;
+}
+
+.clear {
+    background-color: #575154; /* hot pink */
+    color: #fff;
+}
+.arithmetic{
+    background-color: rgb(233, 188, 64);
+    color: #fff;
+}
+.calculator-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-container {
+    flex: 1;
+    margin: 3px;
+    margin-left: 33%;
+}
+
+.gif {
+    flex: 1;
+    text-align: center;
+}
+
+.gif img {
+    width: 300px; /* adjust the width as needed */
+    height: 350px; /* adjust the height as needed */
+    margin-top: 200px;
+    border-radius: 20%;
+    opacity: 0.5;
+}
 #screen {
-    width: 200px;
-    height: 30px;
+    width: 250px;
+    height: 40px;
     font-size: 24px;
     padding: 10px;
     border: none;
     border-radius: 10px;
     text-align: right;
+    background-color: #fff; /* white */
 }
