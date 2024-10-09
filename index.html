@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="./Image/icon.avif" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Calculator</title>
     <link rel="stylesheet" href="style.css">
@@ -11,12 +12,12 @@
     <div class="calculator-container">
         <div class="form-container">
     <form>  
-        <input type="text" id="screen" readonly> 
+        <input type="button" id="screen" placeholder="NaN">
         <div class="button-grid">
             <div class="row">
                 <button class="clear" value="C">C</button>
-                <button class="clear" value="()">()</button>
-                <button class="clear" value="%">%</button>
+                <button class="clear" value="(">(</button>
+                <button class="clear" value=")">)</button>
                 <button class="arithmetic" value="/">/</button>
             </div>
             <div class="row">
@@ -35,22 +36,24 @@
                 <button class="num" value="1">1</button>
                 <button class="num" value="2">2</button>
                 <button class="num" value="3">3</button>
-                <button class="arithmetic" value="*">+</button>
+                <button class="arithmetic" value="+">+</button>
             </div>
             <div class="row">
-                <button class="num" value="^">^</button>
+                <button class="arithmetic" value="^">^</button>
                 <button class="num" value="0">0</button>
                 <button class="num" value=".">.</button>
-                 <button class="arithmetic" value="=">=</button>
+                 <button class="" value="=">=</button>
             </div>
             <div class="row">
-                <button class="operator" value="sqrt">sqrt</button>
+                <button class="operator" value="sqrt">√</button>
                 <button class="operator" value="log">log</button>
                 <button class="operator" value="sin">sin</button>
                 <button class="operator" value="cos">cos</button>
             </div>
             <div class="row">
                 <button class="operator" value="tan">tan</button>
+                <button class="operator" value="!">!</button>
+                <button style=" background-color: #ff3597 ;" class="clear" value="%">%</button>
             </div> 
         </div>
          

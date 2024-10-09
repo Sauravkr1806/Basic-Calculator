@@ -1,111 +1,92 @@
 // Get the input screen element
 const screen = document.getElementById('screen');
 
-// Define a function to update the screen with the current calculation
-function updateScreen(value) {
-  screen.value = value;
-}
+// Get all the button elements
+const buttons = document.querySelectorAll('button');
 
-// Define a function to perform calculations
-function calculate() {
-  const calculation = screen.value;
-  try {
-    const result = eval(calculation);
-    updateScreen(result);
-  } catch (error) {
-    updateScreen('Error');
-  }
-}
+// Initialize the calculator state
+let calculation = '';
+let result = '';
 
-// Define a function to handle parentheses
-function handleParentheses(value) {
-  const calculation = screen.value;
-  if (value === '(') {
-    updateScreen(calculation + '(');
-  } else if (value === ')') {
-    updateScreen(calculation + ')');
-  }
-}
-
-// Define a function to handle percentage
-function handlePercentage() {
-  const calculation = screen.value;
-  const num = parseFloat(calculation);
-  updateScreen(num / 100);
-}
-
-// Define a function to handle exponentiation
-function handleExponentiation() {
-  const calculation = screen.value;
-  const num = parseFloat(calculation);
-  updateScreen(Math.pow(num, 2));
-}
-
-// Define a function to handle square root
-function handleSquareRoot() {
-  const calculation = screen.value;
-  const num = parseFloat(calculation);
-  updateScreen(Math.sqrt(num));
-}
-
-// Define a function to handle logarithm
-function handleLogarithm() {
-  const calculation = screen.value;
-  const num = parseFloat(calculation);
-  updateScreen(Math.log(num));
-}
-
-// Define a function to handle trigonometric functions
-function handleTrigonometricFunctions(value) {
-  const calculation = screen.value;
-  const num = parseFloat(calculation);
-  switch (value) {
-    case 'sin':
-      updateScreen(Math.sin(num));
-      break;
-    case 'cos':
-      updateScreen(Math.cos(num));
-      break;
-    case 'tan':
-      updateScreen(Math.tan(num));
-      break;
-  }
+// Factorial Function
+function factorial(n){
+    if(n < 0) return "Error";
+    if(n == 0 || n == 1) return 1;
+    return n * factorial(n-1);
 }
 
 // Add event listeners to each button
-document.querySelectorAll('button').forEach((button) => {
-  button.addEventListener('click', (event) => {
-    const value = event.target.value;
-    switch (value) {
-      case 'C':
-        updateScreen('');
-        break;
-      case '(':
-      case ')':
-        handleParentheses(value);
-        break;
-      case '%':
-        handlePercentage();
-        break;
-      case '^':
-        handleExponentiation();
-        break;
-      case 'sqrt':
-        handleSquareRoot();
-        break;
-      case 'log':
-        handleLogarithm();
-        break;
-      case 'sin':
-      case 'cos':
-      case 'tan':
-        handleTrigonometricFunctions(value);
-        break;
-      case '=':
-        calculate();
-        break;
-      default:
-        updateScreen(screen.value + value);
+buttons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    // Prevent default action (such as form submission)
+    e.preventDefault();
+
+    const value = e.target.value;
+    const className = e.target.className;
+
+    // Handle clear button
+    if (className === 'clear') {
+      if (value === 'C') {
+        calculation = '';
+        result = '';
+        screen.value = '';
+      } else if (value === '(' || value === ')' || value === '%') {
+        calculation += value;
+        screen.value = calculation;
+      }
+    }
+    // Handle number buttons
+    else if (className === 'num') {
+      calculation += value;
+      screen.value = calculation;
+    }
+    // Handle arithmetic operator buttons
+    else if (className === 'arithmetic') {
+      if(value === '^'){
+        calculation += '**';
+      }
+      else{
+      calculation += value;
+      }
+      screen.value = calculation;
+    }
+    // Handle operator buttons (sqrt, log, sin, cos, tan)
+    else if (className === 'operator') {
+      if (value === 'sqrt') {
+        calculation = `Math.sqrt(${calculation})`;
+      } else if (value === 'log') {
+        calculation = `Math.log(${calculation})`;
+      } else if (value === 'sin') {
+        calculation = `Math.sin(${calculation})`;
+      } else if (value === 'cos') {
+        calculation = `Math.cos(${calculation})`;
+      } else if (value === 'tan') {
+        calculation = `Math.tan(${calculation})`;
+      } else if (value === '!'){
+        result = factorial(parseFloat(calculation));
+        screen.value = result;
+        calculation = result.toString();
+      }
+      screen.value = calculation;
+    }
+    // Handle equals button
+    else if (value === '=') {
+      try {
+        console.log("Calculation before eval: ", calculation);
+        if(calculation.includes('%')){
+          calculation = calculation.replace(/%/g, '/100');
+        }
+        result = eval(calculation);
+        screen.value = result;
+        calculation = result.toString();  // Clear the calculation after displaying the result
+      } catch (error) {
+        screen.value = 'Error';
+        calculation = '';
+      }
     }
   });
 });
+
+// Update the year in the footer
+const yearElement = document.getElementById('year');
+yearElement.textContent = `© ${new Date().getFullYear()}`;
