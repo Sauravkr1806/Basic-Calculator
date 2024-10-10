@@ -14,3 +14,6 @@ Mozilla-Firefox Make.html
 [Rules](#rules).
 
 [Conclusion](#conclusion).
+
+# Demo
+[Live Demo](https://sauravkr1806.github.io/Basic-Calculator/)
