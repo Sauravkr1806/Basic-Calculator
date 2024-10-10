@@ -2,7 +2,7 @@
 This calculator project includes basic arithmetic operations like addition, subtraction, multiplication, and division.
 
 # Run on Terminal
-Mozilla-Firefox Make.html
+Mozilla-Firefox index.html
 
 # Table Content
 [OverView](https://github.com/Sauravkr1806/Basic-Calculator/tree/main#overview).
